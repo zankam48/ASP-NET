@@ -4,6 +4,8 @@ using WebApplication1.Dtos;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+const string GetGameEndpointName = "GetGame";
+
 List<GameDto> games = [
     new (
         1, "Genshin Impact", "Fighting", 0M, new DateOnly(2020,8,12)
@@ -21,7 +23,7 @@ app.MapGet("games", () => games);
 
 // GET /games/{id}
 app.MapGet("games/{id}", (int id) => games.Find(game => game.Id == id))
-.WithName("GetGame");
+.WithName(GetGameEndpointName);
 
 // POST /games
 app.MapPost("games", (CreateGameDto newGame) => {
@@ -35,7 +37,7 @@ app.MapPost("games", (CreateGameDto newGame) => {
 
     games.Add(game);
 
-    return Results.CreatedAtRoute("GetGame", new {id = game.Id}, game);
+    return Results.CreatedAtRoute(GetGameEndpointName, new {id = game.Id}, game);
 });
 
 app.Run();
