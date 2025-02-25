@@ -20,7 +20,8 @@ List<GameDto> games = [
 app.MapGet("games", () => games);
 
 // GET /games/{id}
-app.MapGet("games/{id}", (int id) => games.Find(game => game.Id == id));
+app.MapGet("games/{id}", (int id) => games.Find(game => game.Id == id))
+.WithName("GetGame");
 
 // POST /games
 app.MapPost("games", (CreateGameDto newGame) => {
@@ -34,7 +35,7 @@ app.MapPost("games", (CreateGameDto newGame) => {
 
     games.Add(game);
 
-    return Results.CreatedAtRoute()
+    return Results.CreatedAtRoute("GetGame", new {id = game.Id}, game);
 });
 
 app.Run();
