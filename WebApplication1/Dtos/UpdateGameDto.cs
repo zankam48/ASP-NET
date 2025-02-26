@@ -1,8 +1,8 @@
 namespace WebApplication1.Dtos;
 
-public record class CreateGameDto(
+public record class UpdateGameDto(
     string Name,
     string Genre, 
-    decimal Price,  
+    decimal Price, 
     DateOnly ReleaseDate
-);
+); 
