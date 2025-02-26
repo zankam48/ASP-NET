@@ -22,17 +22,18 @@ public static class GameEndpoints
 
     // extension methods -> use "this"
     public static WebApplication MapGamesEndpoints(this WebApplication app){
-        app.MapGet("games", () => games);
+        var group = app.MapGroup("games");
+        group.MapGet("games", () => games);
 
         // GET /games/{id}
-        app.MapGet("games/{id}", (int id) => {
+        group.MapGet("games/{id}", (int id) => {
             GameDto? game = games.Find(game => game.Id == id);
             return game is null ? Results.NotFound() : Results.Ok(game);
         })
         .WithName(GetGameEndpointName);
 
         // POST /games
-        app.MapPost("games", (CreateGameDto newGame) => {
+        group.MapPost("games", (CreateGameDto newGame) => {
             GameDto game = new(
                 games.Count + 1,
                 newGame.Name,
@@ -47,7 +48,7 @@ public static class GameEndpoints
         });
 
         // PUT /games/{id}
-        app.MapPut("games/{id}", (int id, UpdateGameDto updatedGame) => {
+        group.MapPut("games/{id}", (int id, UpdateGameDto updatedGame) => {
             var index = games.FindIndex(game => game.Id == id);
 
             if (index == -1) {
@@ -66,7 +67,7 @@ public static class GameEndpoints
         });
 
         // DELETE /games/{id}
-        app.MapDelete("games/{id}", (int id) => {
+        group.MapDelete("games/{id}", (int id) => {
             games.RemoveAll(game => game.Id == id);
 
             return Results.NoContent();
