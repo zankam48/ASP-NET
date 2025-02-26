@@ -9,14 +9,13 @@ POST http://localhost:5146/games
 Content-Type: application/json
 
 {
-    "name": "Gojek Sim",
     "genre": "Slice of Life",
     "price": 29.99,
     "releaseDate": "2019-11-18"
 }
 
 ###
-PUT http://localhost:5146/games/6
+PUT http://localhost:5146/games/5
 Content-Type: application/json
 
 {
