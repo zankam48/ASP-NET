@@ -9,6 +9,7 @@ POST http://localhost:5146/games
 Content-Type: application/json
 
 {
+    "name": "GamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqwGamedwqdqw",
     "genre": "Slice of Life",
     "price": 29.99,
     "releaseDate": "2019-11-18"
